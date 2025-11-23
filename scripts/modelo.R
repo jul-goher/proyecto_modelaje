@@ -1,4 +1,4 @@
-##########        MODELO         ##########
+##########        MODELO  DENGUE      ##########
 library(deSolve)
 
 SEIHRV <- function (t, estado, parametros) {
@@ -15,14 +15,17 @@ SEIHRV <- function (t, estado, parametros) {
 }
 
 #### DENV 1 
-pars_d1 <- c ( mu =0.0000169 , beta = 0.048, gamma = 0.00063, rho = 0.4, sigma = 0.1 , alpha = 0.657 , delta = 0.05, epsilon = 0.657, lambda = 7.0002e-05, K = 0.001)
-condiciones_d1 <- c (S= 100000, E=50, I=10, G=2, H=3, R=3 , V = 2)
+pars_d1 <- c ( mu =0.0000169 , beta = 0.048, gamma = 0.00063, rho = 0.4, 
+               sigma = 0.1 , alpha = 0.657 , delta = 0.05, epsilon = 0.657, 
+               lambda = 7.0002e-05, K = 0.001)
+condiciones_d1 <- c (S= 1000000, E = 10, I = 1000, G = 30, H = 10, R = 15 , V = 40)
 tiempo_d1 <- seq (0, 100, by = 0.05)
 out_d1 <- ode(condiciones_d1, tiempo_d1, SEIHRV, pars_d1) 
 
-matplot(out_d1 [ , 1], out_d1 [ , 2:8], type = "l", xlab = "tiempo", ylab = "Población", 
-        main = "DENV-1", lwd = 2)
-legend ("topright", c("Susceptibles", "Expuestos", "I_Leves", "I_Graves", "Hospitalizados", "Recuperados", "Vacunados"), 
+matplot(out_d1 [ , 1], out_d1 [ , 2:8], type = "l", xlab = "tiempo", 
+        ylab = "Población", main = "DENV-1", lwd = 2)
+legend ("topright", c("Susceptibles", "Expuestos", "I_Leves",
+                      "I_Graves", "Hospitalizados", "Recuperados", "Vacunados"), 
         col = 1:4, lty = 1:3, cex= 0.5)
 
 ##### DENV 2 
