@@ -54,7 +54,7 @@ legend ("topright", c("Susceptibles", "Expuestos", "I_Leves", "I_Graves", "Hospi
 
 
 ##### DENV 4 
-pars_d4 <- c ( mu =0.0000169 , beta = 0.081, gamma = 0.00053, rho = 0.4, sigma = , alpha = 0.687 , delta = , epsilon = 0.687, lambda =  )
+pars_d4 <- c ( mu =0.0000169 , beta = 0.081, gamma = 0.00053, rho = 0.4, sigma = , alpha = 0.687 , delta = , epsilon = 0.687, lambda = 0.9 )
 condiciones_d4 <- c (S= 100,000, E=50, I=10, G=2, H=3, R=3 , V = 2)
 tiempo_d4 <- seq (0, 100, by = 0.05)
 out_d4 <- ode(condiciones_d4, tiempo_d4, SEIHRV, pars_d4) 
