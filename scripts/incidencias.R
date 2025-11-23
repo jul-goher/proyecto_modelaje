@@ -7,7 +7,7 @@ library(dplyr)
 
 incidencia_completa <- function (estado) {
   #Fecha tipo as.Date
-  estado$FECHA_SIGN_SINTOMAS <- as.Date(estado$FECHA_SIGN_SINTOMAS) #La puse porque no lo lee como Date
+  estado$FECHA_SIGN_SINTOMAS <- as.Date(estado$FECHA_SIGN_SINTOMAS) #La puse porque el filtrado original no lee como Date
   
   #Incidencia diaria 
   incidencia_day <- estado %>% count (FECHA_SIGN_SINTOMAS, name = "positivos")  %>% 
@@ -97,13 +97,6 @@ yu_inc <- incidencia_completa (yucatan)
 za_inc <- incidencia_completa (zacatecas)
 
 
-# Si se quiere graficar
-#Histograma de casos 
-ggplot (dg_inc, aes(x = FECHA_SIGN_SINTOMAS, y = positivos)) +
-  geom_col (fill = "seagreen3") +
-  labs(title = "Incidencia diaria en Durango",
-       x = "Fecha", y = "Casos diarios")
-
 
 ###########          INCIDENCIA POR MES    ###############   
 
@@ -171,8 +164,6 @@ codigo_nombre <- c("DURANGO",
 
 
 
-
-
 ggplot(df_estados_inc, 
        aes(x = MES, 
            y = inc_mes, 
@@ -184,19 +175,6 @@ ggplot(df_estados_inc,
        y = "Incidencia mensual",
        color = "Entidad") +
   theme_minimal()
-
-
-
-############# MAPEO DE INCIDENCIA  #############
-#install.packages ("sf")
-install.packages ("mapview")
-
-library (sf)
-library (mapview)
-
-mapview()
-
- 
 
 
 

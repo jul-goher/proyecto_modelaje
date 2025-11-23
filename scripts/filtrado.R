@@ -10,7 +10,6 @@ dengue_datos$FECHA_SIGN_SINTOMAS <- as.Date(dengue_datos$FECHA_SIGN_SINTOMAS)
 
 #-------------------------------------------------------------------------------
 # Filtrado de los datos por estado
-#-------------------------------------------------------------------------------
 
 # DURANGO
 durango <- dengue_datos %>% filter(ENTIDAD_RES == "10")
@@ -145,5 +144,5 @@ chihuahua <- dengue_datos %>% filter(ENTIDAD_RES == "8")
 # No hay casos regitrados:
 ciudad.mexico <- dengue_datos %>% filter(ENTIDAD_RES == "9")
 
-#-------------------------------------------------------------------------------
+
 
