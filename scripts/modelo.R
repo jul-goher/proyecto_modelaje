@@ -16,9 +16,10 @@ SEIHRV <- function (t, estado, parametros) {
 
 #### DENV 1 
 pars_d1 <- c ( mu =0.0000169 , beta = 0.048, gamma = 0.00063, rho = 0.4, 
-               sigma = 0.1 , alpha = 0.657 , delta = 0.05, epsilon = 0.657, 
-               lambda = 7.0002e-05, K = 0.001)
-condiciones_d1 <- c (S= 1000000, E = 10, I = 1000, G = 30, H = 10, R = 15 , V = 40)
+               sigma = 0.1 , alpha = 0.657 , delta = 0.05, 
+               epsilon = 0.657, lambda = 7.0002e-05, K = 0.001)
+condiciones_d1 <- c (S= 1000000, E = 10, I = 1000, 
+                     G = 30, H = 10, R = 15 , V = 30)
 tiempo_d1 <- seq (0, 100, by = 0.05)
 out_d1 <- ode(condiciones_d1, tiempo_d1, SEIHRV, pars_d1) 
 
