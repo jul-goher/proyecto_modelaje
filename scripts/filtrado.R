@@ -3,7 +3,7 @@ library(tidyr)
 library(tidyverse)
 library(dplyr)
 ##------------------------------------------------------------------------------
-dengue_datos <- read.csv("RAW DATA/dengue_abierto.csv")
+dengue_datos <- read.csv("data/dengue_abierto.csv")
 
 #Columna de fechas como as.Date
 dengue_datos$FECHA_SIGN_SINTOMAS <- as.Date(dengue_datos$FECHA_SIGN_SINTOMAS) 

@@ -2,7 +2,6 @@
 library(tidyverse)
 library(dplyr)
 
-
 #### Función de incidencia 
 
 incidencia_completa <- function (estado) {
@@ -136,49 +135,30 @@ df_estados_inc #la incidencia por cada uno de los eatados del país
 
 
 # as.integer(codigo_nombre)-> c
-codigo_nombre <- c("DURANGO",
-                   "GUANAJUATO",
-                   "GUERRERO",
-                   "HIDALGO",
-                   "JALISCO",
-                   "MÉXICO",
-                   "MICHOACÁN",
-                   "MORELOS",
-                   "NAYARIT",
-                   "NUEVO LEON",
-                   "OAXACA",
-                   "PUEBLA",
-                   "QUERÉTARO",
-                   "QUINTANA",
-                   "SAN LUIS POTOSI",
-                   "SINALOA",
-                   "SONORA",
-                   "TABASCO",
-                   "TAMAULIPAS",
-                   "TLAXCALA",
-                   "VERACRUZ",
-                   "YUCATÁN",
-                   "ZACATECAS"
-)
+nombres_estados <- c("AGUASCALIENTES", "BAJA CALIFORNIA", "BAJA CALIFORNIA SUR", "CAMPECHE", "COAHUILA",
+                   "COLIMA", "CHIAPAS", "CHIHUAHUA", "CIUDAD DE MÉXICO", "DURANGO", "GUANAJUATO",
+                   "GUERRERO", "HIDALGO", "JALISCO", "MÉXICO", "MICHOACÁN", "MORELOS", "NAYARIT",
+                   "NUEVO LEÓN", "OAXACA", "PUEBLA", "QUERÉTARO", "QUINTANA ROO", "SAN LUIS POTOSÍ",
+                   "SINALOA", "SONORA", "TABASCO", "TAMAULIPAS", "TLAXCALA", "VERACRUZ",
+                   "YUCATÁN", "ZACATECAS")
 
+#Añadir una columna para que salgan por nombre los estados en la leyenda de la gráfica
+df_estados_inc <- df_estados_inc %>% mutate(Entidad_nombre = nombres_estados[ENTIDAD - 9])
+#le agregué [ENTIDAD - 9] porque se repite el número del estado por día., entonces con esto 
+#va contandp desde el estado 10 hasta el 32
+#Es decir,el número 10 apunta al índice 1 del vector que se definió en códigos_estados
 
+df_estados_inc 
 
 
 ggplot(df_estados_inc, 
        aes(x = MES, 
            y = inc_mes, 
-           group = ENTIDAD,
-           color = as.factor(ENTIDAD))) +
+           group = Entidad_nombre,
+           color =Entidad_nombre)) +
   geom_line(linewidth =  1) +
   geom_point() +
   labs(x = "Mes",
        y = "Incidencia mensual",
        color = "Entidad") +
   theme_minimal()
-
-
-
-
-
-
-
