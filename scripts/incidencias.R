@@ -162,3 +162,35 @@ ggplot(df_estados_inc,
        y = "Incidencia mensual",
        color = "Entidad") +
   theme_minimal()
+
+###################
+#dengue por serotipo 
+
+#primero hacer una tabla con el nro de casos por serotipo en cada estado 
+
+incidencia_serotipo <- dengue_datos %>% filter (! is.na(RESULTADO_PCR)) %>% #eliminamos si hay datos que no tengan el resultado 
+  group_by(ENTIDAD_RES, RESULTADO_PCR) %>% #agrupamos por estado y por serotipo 
+  summarise(casos= n(), .groups = "drop")%>% #casos n es para contar las filas en cada grupo, pq quiero ver cuantos casos hay en cada combinación 
+  mutate(
+    SEROTIPO = case_when(
+      RESULTADO_PCR == 1 ~ "DENV1",
+      RESULTADO_PCR == 2 ~ "DENV2",
+      RESULTADO_PCR == 3 ~ "DENV3",
+      RESULTADO_PCR == 4 ~ "DENV4",
+      RESULTADO_PCR == 5 ~ "Sin serotipo aislado"
+    ), Entidad_nombre = nombres_estados[as.integer(ENTIDAD_RES)] #como no daba los nombres si no los numeros le puse el objeto de nombre estado que se creo antes
+  )
+incidencia_serotipo
+#mutate para que no te de los numeros si no los serotipos tambien 
+#hacemos la gráfica esta
+library(ggplot2)
+
+ggplot(incidencia_serotipo, 
+       aes(x = Entidad_nombre, y = casos, fill = SEROTIPO)) +
+  geom_col() +
+  labs(title = "Casos de dengue por serotipo y estado",
+       x = "Entidad federativa",
+       y = "Número de casos") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 65, hjust = 1))
+#este es para que los nombres no se encimen
