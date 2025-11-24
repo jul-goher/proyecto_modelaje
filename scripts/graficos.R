@@ -81,6 +81,7 @@ nueva_dos <- rbind(ja_inc2,vz_inc2, n )
 
 # Para ver el total de los casos:
 totales_por_estado <- function(data){
+  
   data %>%
     group_by(estado) %>%
     summarise(
@@ -91,14 +92,12 @@ totales_por_estado <- function(data){
 }
 
 # Casos totales por de todo el estudio:
-totales_por_estado(nueva) -> incidencia.total.periodo
-max(incidencia.total.periodo$total_positivos)
+totales_por_estado(nueva) -> incidencia_total
+max(incidencia_total$total_positivos)
 
 #PARA VER LOS ESTADOS CON MAYOR CASOS REPORTADOS
-incidencia.total.periodo %>%
+incidencia_total %>%
   arrange(desc(total_positivos)) 
-
-
 
 # Gráfico
 casos <- ggplot(nueva, aes(x = FECHA_SIGN_SINTOMAS, y = positivos, group = estado, color = estado)) + 
